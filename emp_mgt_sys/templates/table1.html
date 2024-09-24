@@ -1,0 +1,63 @@
+{% load static %}
+<html>
+      <head>
+            <title>Display Data</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+             <!-- Font Awesome 4.7 -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+            <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+            
+      </head>
+      <body>
+            <nav class="navbar navbar-light bg-light">
+                  <form class="form-inline mx-auto">
+                    <input class="form-control m-2" style="width: 1000px;" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>
+                </nav>
+            <table border="2" cellspacing="0" class="m-2 text-center mx-auto">
+                  <tr>
+                        <th>Id</th>
+                        <th>Employee Photo</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Date of Birth</th>
+                        <th>Contact no</th>
+                        <th>Email Address</th>
+                        <th>Residential Address</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                  </tr>
+                  {% for n in empdata %}
+                  <tr>
+                        <td>{{n.id}}</td>
+                        <td><img src="/media/{{n.emp_photo}}" alt="image display error" height="100px" width="100px"/></td>
+                        <td>{{n.first_name}}</td>
+                        <td>{{n.last_name}}</td>
+                        <td>{{n.dob}}</td>
+                        <td>{{n.contact_no}}</td>
+                        <td>{{n.email}}</td>
+                        <td>{{n.address}}</td>
+                        <td><a href="{% url 'update' n.id %}" class="text-white"><button class="btn btn-success m-2 " id="updateBtn"><i class="fa fa-pencil"></i></button></a></td>
+                        <td><a class="btn btn-danger m-2" href="/delete/{{n.id}}"><i class="fa fa-trash"></i></a></td>
+                  </tr>
+                  {% endfor %}
+            </table>
+            <a href="/" class="btn btn-primary mt-2 m-4">Go Home</a>
+
+            
+            {% if messages %}
+            <script>
+              window.onload = function() {
+                {% for message in messages %}
+                  alert("{{ message }}");
+                {% endfor %}
+              }
+            </script>
+          {% endif %}
+      </body>
+</html> 
+
